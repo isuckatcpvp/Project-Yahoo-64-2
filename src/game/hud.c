@@ -247,11 +247,10 @@ void render_hud_power_meter(void) {
 
     sPowerMeterVisibleTimer++;
 }
-
 #ifdef VERSION_JP
-#define HUD_TOP_Y 210
+#define HUD_TOP_Y 200   // was 210 (JP)
 #else
-#define HUD_TOP_Y 209
+#define HUD_TOP_Y 199   // was 209 (US and others)
 #endif
 
 /**
@@ -263,25 +262,17 @@ void render_hud_mario_lives(void) {
     print_text_fmt_int(GFX_DIMENSIONS_RECT_FROM_LEFT_EDGE(54), HUD_TOP_Y, "%d", gHudDisplay.lives);
 }
 
+
+#define HUD_COUNTER_X 222 // was 242; lower = further left
 /**
  * Renders the amount of coins collected.
  */
 void render_hud_coins(void) {
-    print_text(168, HUD_TOP_Y, "+"); // 'Coin' glyph
-    print_text(184, HUD_TOP_Y, "*"); // 'X' glyph
-    print_text_fmt_int(198, HUD_TOP_Y, "%d", gHudDisplay.coins);
+    print_text(HUD_COUNTER_X, HUD_TOP_Y - 20, "+"); // 'Coin' glyph
+    print_text(HUD_COUNTER_X + 16, HUD_TOP_Y - 20, "*"); // 'X' glyph
+    print_text_fmt_int(HUD_COUNTER_X + 30, HUD_TOP_Y - 20, "%d", gHudDisplay.coins);
 }
 
-#ifdef VERSION_JP
-#define HUD_STARS_X 73
-#else
-#define HUD_STARS_X 78
-#endif
-
-/**
- * Renders the amount of stars collected.
- * Disables "X" glyph when Mario has 100 stars or more.
- */
 void render_hud_stars(void) {
     s8 showX = 0;
 
@@ -293,14 +284,13 @@ void render_hud_stars(void) {
         showX = 1;
     }
 
-    print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X), HUD_TOP_Y, "-"); // 'Star' glyph
+    // Aligned perfectly at 242 X, sitting 20 pixels directly above the coins
+    print_text(HUD_COUNTER_X, HUD_TOP_Y, "-"); // 'Star' glyph
     if (showX == 1) {
-        print_text(GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X) + 16, HUD_TOP_Y, "*"); // 'X' glyph
-    }
-    print_text_fmt_int((showX * 14) + GFX_DIMENSIONS_RECT_FROM_RIGHT_EDGE(HUD_STARS_X - 16),
-                       HUD_TOP_Y, "%d", gHudDisplay.stars);
+    print_text(HUD_COUNTER_X + 16, HUD_TOP_Y, "*"); // 'X' glyph
 }
-
+    print_text_fmt_int((showX * 14) + HUD_COUNTER_X + 16, HUD_TOP_Y, "%d", gHudDisplay.stars);
+}
 /**
  * Unused function that renders the amount of keys collected.
  * Leftover function from the beta version of the game.
@@ -441,7 +431,7 @@ void render_hud(void) {
             render_hud_mario_lives();
         }
 
-        if (hudDisplayFlags & HUD_DISPLAY_FLAG_COIN_COUNT) {
+        //if (hudDisplayFlags & HUD_DISPLAY_FLAG_COIN_COUNT) {
             render_hud_coins();
         }
 
@@ -462,4 +452,4 @@ void render_hud(void) {
             render_hud_timer();
         }
     }
-}
+

@@ -1,10 +1,7 @@
 #include <PR/ultratypes.h>
 #include <stdio.h>
 
-#if defined(VERSION_JP) || defined(VERSION_US)
 #include "prevent_bss_reordering.h"
-#endif
-
 #include "debug_utils.h"
 #include "dynlist_proc.h"
 #include "gd_macros.h"
@@ -137,7 +134,7 @@ void Unknown801781DC(struct ObjZone *zone) {
     f32 sp2C;
     struct ObjLight *light;
     register struct ListNode *link = zone->unk30->firstMember; // s0 (24)
-    struct GdObj *obj;                                 // 20
+    struct GdObj *obj;                                         // 20
 
     while (link != NULL) {
         obj = link->obj;
@@ -317,7 +314,7 @@ void draw_material(struct ObjMaterial *mtl) {
         if (sPhongLight != NULL && sPhongLight->unk30 > 0.0f) {
             if (gViewUpdateCamera != NULL) {
                 gd_dl_hilite(mtl->gddlNumber, gViewUpdateCamera, &sPhongLight->position,
-                              &sLightPositionOffset, &sPhongLightPosition, &sPhongLight->colour);
+                             &sLightPositionOffset, &sPhongLightPosition, &sPhongLight->colour);
             } else {
                 fatal_printf("draw_material() no active camera for phong");
             }
@@ -359,7 +356,8 @@ void check_face_bad_vtx(struct ObjFace *face) {
             return;
         }
         if ((uintptr_t) vtx->gbiVerts == 0x3F800000) {
-            fatal_printf("bad2 %x,%d,%d,%d\n", (u32) (uintptr_t) vtx, vtx->scaleFactor, vtx->id, vtx->header.type);
+            fatal_printf("bad2 %x,%d,%d,%d\n", (u32) (uintptr_t) vtx, vtx->scaleFactor, vtx->id,
+                         vtx->header.type);
         }
     }
 }
@@ -429,7 +427,8 @@ void Unknown80178ECC(f32 v0X, f32 v0Y, f32 v0Z, f32 v1X, f32 v1Y, f32 v1Z) {
     f32 difX = v1X - v0X;
     f32 difZ = v1Z - v0Z;
 
-    gd_dl_make_triangle(v0X, v0Y, v0Z, v1X, v1Y, v1Z, v0X + difY * 0.1, v0Y + difX * 0.1, v0Z + difZ * 0.1);
+    gd_dl_make_triangle(v0X, v0Y, v0Z, v1X, v1Y, v1Z, v0X + difY * 0.1, v0Y + difX * 0.1,
+                        v0Z + difZ * 0.1);
 }
 
 /**
@@ -610,8 +609,8 @@ void draw_net(struct ObjNet *self) {
     }
 
     if (net->shapePtr != NULL) {
-        draw_shape(net->shapePtr, 0x10, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
-                   0.0f, 0.0f, 0.0f, 0.0f, 0.0f, netColor, &net->mat168);
+        draw_shape(net->shapePtr, 0x10, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f,
+                   0.0f, 0.0f, netColor, &net->mat168);
     }
 
     if (net->unk1C8 != NULL) {
@@ -629,18 +628,13 @@ void draw_gadget(struct ObjGadget *gdgt) {
         colour = gdgt->colourNum;
     }
 
-    draw_rect_fill(colour,
-        gdgt->worldPos.x,
-        gdgt->worldPos.y,
-        gdgt->worldPos.x + gdgt->sliderPos * gdgt->size.x,
-        gdgt->worldPos.y + gdgt->size.y);
+    draw_rect_fill(colour, gdgt->worldPos.x, gdgt->worldPos.y,
+                   gdgt->worldPos.x + gdgt->sliderPos * gdgt->size.x, gdgt->worldPos.y + gdgt->size.y);
 
     if (gdgt->header.drawFlags & OBJ_HIGHLIGHTED) {
-        draw_rect_stroke(COLOUR_YELLOW,
-            gdgt->worldPos.x,
-            gdgt->worldPos.y,
-            gdgt->worldPos.x + gdgt->sliderPos * gdgt->size.x,
-            gdgt->worldPos.y + gdgt->size.y);
+        draw_rect_stroke(COLOUR_YELLOW, gdgt->worldPos.x, gdgt->worldPos.y,
+                         gdgt->worldPos.x + gdgt->sliderPos * gdgt->size.x,
+                         gdgt->worldPos.y + gdgt->size.y);
     }
     gdgt->header.drawFlags &= ~OBJ_HIGHLIGHTED;
 }
@@ -675,7 +669,8 @@ void draw_camera(struct ObjCamera *cam) {
         gd_printf("Draw_Camera(): Zero view distance\n");
         return;
     }
-    gd_dl_lookat(cam, cam->worldPos.x, cam->worldPos.y, cam->worldPos.z, sp44.x, sp44.y, sp44.z, cam->unkA4);
+    gd_dl_lookat(cam, cam->worldPos.x, cam->worldPos.y, cam->worldPos.z, sp44.x, sp44.y, sp44.z,
+                 cam->unkA4);
 }
 
 /**
@@ -785,9 +780,10 @@ void drawscene(enum SceneType process, struct ObjGroup *interactables, struct Ob
     restart_timer("draw1");
     set_gd_mtx_parameters(G_MTX_PROJECTION | G_MTX_MUL | G_MTX_PUSH);
     if (sUpdateViewState.view->projectionType == 1) {
-        gd_create_perspective_matrix(sUpdateViewState.view->clipping.z,
-                      sUpdateViewState.view->lowerRight.x / sUpdateViewState.view->lowerRight.y,
-                      sUpdateViewState.view->clipping.x, sUpdateViewState.view->clipping.y);
+        gd_create_perspective_matrix(
+            sUpdateViewState.view->clipping.z,
+            sUpdateViewState.view->lowerRight.x / sUpdateViewState.view->lowerRight.y,
+            sUpdateViewState.view->clipping.x, sUpdateViewState.view->clipping.y);
     } else {
         gd_create_ortho_matrix(
             -sUpdateViewState.view->lowerRight.x / 2.0, sUpdateViewState.view->lowerRight.x / 2.0,
@@ -933,8 +929,8 @@ void draw_bone(struct GdObj *obj) {
 
     if (sSceneProcessType != FIND_PICKS) {
         draw_shape(bone->shapePtr, 0x1B, scale.x, scale.y, scale.z, bone->worldPos.x, bone->worldPos.y,
-                   bone->worldPos.z, 0.0f, 0.0f, 0.0f, bone->unk28.x, bone->unk28.y, bone->unk28.z, colour,
-                   &bone->mat70);
+                   bone->worldPos.z, 0.0f, 0.0f, 0.0f, bone->unk28.x, bone->unk28.y, bone->unk28.z,
+                   colour, &bone->mat70);
     }
 }
 
@@ -1514,8 +1510,6 @@ void update_view(struct ObjView *view) {
                     sPickedObject->drawFlags |= OBJ_PICKED;
                     sPickedObject->drawFlags |= OBJ_HIGHLIGHTED;
                     sUpdateViewState.view->pickedObj = sPickedObject;
-                    gGdCtrl.dragStartX = gGdCtrl.csrX = sGrabCords.x;
-                    gGdCtrl.dragStartY = gGdCtrl.csrY = sGrabCords.y;
                 }
             }
 

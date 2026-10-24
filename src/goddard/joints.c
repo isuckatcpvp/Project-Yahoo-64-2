@@ -1,9 +1,5 @@
 #include <PR/ultratypes.h>
 
-#if defined(VERSION_EU) || defined(VERSION_SH) || defined(VERSION_CN)
-#include "prevent_bss_reordering.h"
-#endif
-
 #include "debug_utils.h"
 #include "draw_objects.h"
 #include "dynlist_proc.h"
@@ -50,7 +46,7 @@ void grabbable_joint_update_func(struct ObjJoint *self) {
     UNUSED u8 filler1[80];
     Mat4f *attObjMtx;
     UNUSED u8 filler2[4];
-    struct GdVec3f offset;  // difference between current position and initial position
+    struct GdVec3f offset; // difference between current position and initial position
     UNUSED u8 filler3[16];
     register struct ListNode *att;
     UNUSED u8 filler4[8];
@@ -69,7 +65,7 @@ void grabbable_joint_update_func(struct ObjJoint *self) {
         self->velocity.z = offset.z * -0.25;
 
         self->flags |= 0x2000;
-        ;  // needed to match
+        ; // needed to match
     } else {
         if (gGdCtrl.trgR == FALSE) { // R trigger is released
             // Set velocity so that the joint approaches its initial position
@@ -148,7 +144,7 @@ void eye_joint_update_func(struct ObjJoint *self) {
         }
     }
 
-    set_cur_dynobj((struct GdObj *)self);
+    set_cur_dynobj((struct GdObj *) self);
     sp5C = d_get_rot_mtx_ptr();
     sp44.x = (*sp5C)[3][0];
     sp44.y = (*sp5C)[3][1];
@@ -192,7 +188,8 @@ void func_8018EE5C(struct ObjJoint *j1, struct ObjJoint *j2, struct ObjJoint *j3
 
     curj = j1;
     while (curj != NULL) {
-        set_joint_vecs(curj, curj->worldPos.x + vec.z, curj->worldPos.y + vec.y, curj->worldPos.z + vec.x);
+        set_joint_vecs(curj, curj->worldPos.x + vec.z, curj->worldPos.y + vec.y,
+                       curj->worldPos.z + vec.x);
         if (curj == j2) {
             break;
         }
@@ -293,8 +290,8 @@ struct ObjJoint *make_grabber_joint(struct ObjShape *shape, s32 flags, f32 x, f3
 void func_8018F328(struct ObjBone *b) {
     struct ObjJoint *joint1;
     struct ObjJoint *joint2;
-    struct ObjGroup *grp; // sp1C
-    struct ListNode *link;   // sp18
+    struct ObjGroup *grp;  // sp1C
+    struct ListNode *link; // sp18
 
     grp = b->unk10C;
     link = grp->firstMember;
@@ -395,9 +392,9 @@ void func_8018F89C(struct ObjBone *b) {
     struct ObjJoint *spAC;
     struct ObjJoint *spA8;
     UNUSED u8 filler[68];
-    struct ObjGroup *grp; // sp60
-    struct ListNode *link;   // sp5c
-    Mat4f mtx;            // sp1c
+    struct ObjGroup *grp;  // sp60
+    struct ListNode *link; // sp5c
+    Mat4f mtx;             // sp1c
 
     grp = b->unk10C;
     link = grp->firstMember;
@@ -551,10 +548,10 @@ s32 func_8018FFE8(struct ObjBone **a0, struct ObjJoint **a1, struct ObjJoint *a2
     struct ObjBone *b; // 1C
     struct ObjJoint *sp18;
     s32 sp14 = 0;
-    struct ObjGroup *bonegrp; // 10
-    struct ObjGroup *grp;     // 0c
-    struct ListNode *bonelink;   // 08
-    struct ListNode *link;       // 04
+    struct ObjGroup *bonegrp;  // 10
+    struct ObjGroup *grp;      // 0c
+    struct ListNode *bonelink; // 08
+    struct ListNode *link;     // 04
 
     grp = a3->unk1C4;
 
@@ -670,7 +667,7 @@ void func_801903E8(struct ObjJoint *j, struct GdVec3f *a1, f32 x, f32 y, f32 z) 
 
 /* 23EBB8 -> 23F184 */
 void func_80190574(s32 a0, struct ObjJoint *a1, struct ObjJoint *a2, f32 x, f32 y, f32 z) { // sp278
-    struct ObjJoint *sp274; // = a2?
+    struct ObjJoint *sp274;                                                                 // = a2?
     struct ObjJoint *sp270; // mid-point of stack array?
     struct ObjJoint *sp26C; // jointstackarr[i]? curjoint?
     UNUSED u8 filler1[4];

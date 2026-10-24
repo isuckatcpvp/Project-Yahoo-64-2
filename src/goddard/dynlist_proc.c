@@ -47,12 +47,12 @@ struct DynObjInfo {
 #define Dyn1AsInt(dyn) ((dyn)->w1.word)
 #define Dyn1AsPtr(dyn) ((dyn)->w1.ptr)
 #define Dyn1AsStr(dyn) ((dyn)->w1.str)
-#define Dyn1AsName(dyn) ((DynObjName)((dyn)->w1.ptr))
+#define Dyn1AsName(dyn) ((DynObjName) ((dyn)->w1.ptr))
 
 #define Dyn2AsInt(dyn) ((dyn)->w2.word)
 #define Dyn2AsPtr(dyn) ((dyn)->w2.ptr)
 #define Dyn2AsStr(dyn) ((dyn)->w2.str)
-#define Dyn2AsName(dyn) ((DynObjName)((dyn)->w2.ptr))
+#define Dyn2AsName(dyn) ((DynObjName) ((dyn)->w2.ptr))
 
 #define DynVec(dyn) (&(dyn)->vec)
 #define DynVecX(dyn) ((dyn)->vec.x)
@@ -61,29 +61,30 @@ struct DynObjInfo {
 ///@}
 
 // data
-static struct DynObjInfo *sGdDynObjList = NULL; // @ 801A8250; info for all loaded/made dynobjs
-static struct GdObj *sDynListCurObj = NULL;     // @ 801A8254
-static struct GdBoundingBox sNullBoundingBox = {        // @ 801A8258
-    0.0, 0.0, 0.0,
-    0.0, 0.0, 0.0
+static struct DynObjInfo *sGdDynObjList = NULL;  // @ 801A8250; info for all loaded/made dynobjs
+static struct GdObj *sDynListCurObj = NULL;      // @ 801A8254
+static struct GdBoundingBox sNullBoundingBox = { // @ 801A8258
+    0.0, 0.0, 0.0, 0.0, 0.0, 0.0
 };
-static s32 sUseIntegerNames = FALSE;  // if TRUE, then all DynNames are specified as integers
+static s32 sUseIntegerNames = FALSE; // if TRUE, then all DynNames are specified as integers
 
 // bss
 static char sIntToStringBuf[DYNOBJ_NAME_SIZE]; ///< buffer for returning formated string from
                                                ///< `integer_name_to_string()`
 static struct DynObjInfo sNullDynObjInfo;      // @ 801B9F08
-static char sDynNameSuffix[DYNOBJ_NAME_SIZE];       // @ 801B9F20; small buf for printing dynid to?
+static char sDynNameSuffix[DYNOBJ_NAME_SIZE];  // @ 801B9F20; small buf for printing dynid to?
 static s32
-    sUnnamedObjCount;      // @ 801B9F28; used to print empty string ids (not NULL char *) to sDynNameSuffix
-static s32 sLoadedDynObjs; // @ 801B9F2C; total loaded dynobjs
+    sUnnamedObjCount; // @ 801B9F28; used to print empty string ids (not NULL char *) to sDynNameSuffix
+static s32 sLoadedDynObjs;                 // @ 801B9F2C; total loaded dynobjs
 static struct DynObjInfo *sDynListCurInfo; // @ 801B9F30; info for most recently added object
-static struct DynObjInfo *sParentObjInfo; ///< Information for `ObjNet` made by `d_add_net_with_subgroup()` or `ObjJoint` made by `d_attach_joint_to_net()`
+static struct DynObjInfo
+    *sParentObjInfo; ///< Information for `ObjNet` made by `d_add_net_with_subgroup()` or `ObjJoint`
+                     ///< made by `d_attach_joint_to_net()`
 static struct DynObjInfo *sStashedDynObjInfo; // @ 801B9F38
 static struct GdObj *sStashedDynObj;          // @ 801B9F3C
 static s32 sDynNetCount;                      // @ 801B9F40
-static char sDynNetNameSuffix[0x20];               // @ 801B9F48
-static char sStashedDynNameSuffix[0x100];                  // @ 801B9F68
+static char sDynNetNameSuffix[0x20];          // @ 801B9F48
+static char sStashedDynNameSuffix[0x100];     // @ 801B9F68
 
 // necessary foreward declarations
 void d_add_net_with_subgroup(s32, DynObjName);
@@ -923,15 +924,15 @@ void alloc_animdata(struct ObjAnimator *animator) {
                     halfarr = &((s16(*)[9]) curAnimSrc->data)[dataIdx];
                     curMtxVec = &((struct AnimMtxVec *) allocSpace)[dataIdx];
 
-                    tri.p0.x = (f32)(*halfarr)[0] * allocMtxScale;
-                    tri.p0.y = (f32)(*halfarr)[1] * allocMtxScale;
-                    tri.p0.z = (f32)(*halfarr)[2] * allocMtxScale;
-                    tri.p1.x = (f32)(*halfarr)[3] * allocMtxScale;
-                    tri.p1.y = (f32)(*halfarr)[4] * allocMtxScale;
-                    tri.p1.z = (f32)(*halfarr)[5] * allocMtxScale;
-                    tri.p2.x = (f32)(*halfarr)[6];
-                    tri.p2.y = (f32)(*halfarr)[7];
-                    tri.p2.z = (f32)(*halfarr)[8];
+                    tri.p0.x = (f32) (*halfarr)[0] * allocMtxScale;
+                    tri.p0.y = (f32) (*halfarr)[1] * allocMtxScale;
+                    tri.p0.z = (f32) (*halfarr)[2] * allocMtxScale;
+                    tri.p1.x = (f32) (*halfarr)[3] * allocMtxScale;
+                    tri.p1.y = (f32) (*halfarr)[4] * allocMtxScale;
+                    tri.p1.z = (f32) (*halfarr)[5] * allocMtxScale;
+                    tri.p2.x = (f32) (*halfarr)[6];
+                    tri.p2.y = (f32) (*halfarr)[7];
+                    tri.p2.z = (f32) (*halfarr)[8];
 
                     gd_set_identity_mat4(&curMtxVec->matrix);
                     gd_rot_mat_about_vec(&curMtxVec->matrix, &tri.p1);
@@ -2382,9 +2383,9 @@ void d_add_valproc(valptrproc_t proc) {
  * or animation data to `ObjGroup`s, or to link joints to `ObjAnimator`s.
  */
 void d_link_with_ptr(void *ptr) {
-    struct GdObj *dynobj;      // sp34
+    struct GdObj *dynobj;     // sp34
     struct ObjValPtr *valptr; // sp30
-    struct ListNode *link;        // sp2C
+    struct ListNode *link;    // sp2C
 
     if (sDynListCurObj == NULL) {
         fatal_printf("proc_dynlist(): No current object");
@@ -2407,10 +2408,10 @@ void d_link_with_ptr(void *ptr) {
             ((struct ObjView *) dynobj)->components = ptr;
             ((struct ObjView *) dynobj)->unk1C =
                 setup_view_buffers(((struct ObjView *) dynobj)->namePtr, ((struct ObjView *) dynobj),
-                                   (s32)((struct ObjView *) dynobj)->upperLeft.x,
-                                   (s32)((struct ObjView *) dynobj)->upperLeft.y,
-                                   (s32)((struct ObjView *) dynobj)->lowerRight.x,
-                                   (s32)((struct ObjView *) dynobj)->lowerRight.y);
+                                   (s32) ((struct ObjView *) dynobj)->upperLeft.x,
+                                   (s32) ((struct ObjView *) dynobj)->upperLeft.y,
+                                   (s32) ((struct ObjView *) dynobj)->lowerRight.x,
+                                   (s32) ((struct ObjView *) dynobj)->lowerRight.y);
             reset_nets_and_gadgets(((struct ObjView *) dynobj)->components);
             break;
         case OBJ_TYPE_FACES:
@@ -2635,8 +2636,10 @@ void d_set_parm_ptr(enum DParmPtr param, void *ptr) {
                         fatal_printf("dsetparmp() too many points");
                     }
                     // `ptr` here is a vertex index, not an actual pointer.
-                    // These vertex indices later get converted to `ObjVertex` pointers when `find_thisface_verts` is called.
-                    ((struct ObjFace *) sDynListCurObj)->vertices[((struct ObjFace *) sDynListCurObj)->vtxCount++] = ptr;
+                    // These vertex indices later get converted to `ObjVertex` pointers when
+                    // `find_thisface_verts` is called.
+                    ((struct ObjFace *) sDynListCurObj)
+                        ->vertices[((struct ObjFace *) sDynListCurObj)->vtxCount++] = ptr;
                     break;
                 default:
                     fatal_printf("Bad parm");
@@ -3128,8 +3131,7 @@ void d_set_skin_weight(s32 vtxId, f32 percentWeight) {
 
     switch (sDynListCurObj->type) {
         case OBJ_TYPE_JOINTS:
-            set_skin_weight((struct ObjJoint *) sDynListCurObj, vtxId, NULL,
-                            percentWeight / 100.0);
+            set_skin_weight((struct ObjJoint *) sDynListCurObj, vtxId, NULL, percentWeight / 100.0);
             break;
         default:
             fatal_printf("%s: Object '%s'(%x) does not support this function.", "dSetSkinWeight()",

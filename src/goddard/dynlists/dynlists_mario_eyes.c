@@ -18,7 +18,8 @@ static s16 verts_mario_eye_right[][3] = {
     { 319, -13, 24 },  { 320, -7, 11 },   { 301, -6, 96 },
 };
 
-static struct GdVtxData vtx_mario_eye_right = { ARRAY_COUNT(verts_mario_eye_right), 0x1, verts_mario_eye_right };
+static struct GdVtxData vtx_mario_eye_right = { ARRAY_COUNT(verts_mario_eye_right), 0x1,
+                                                verts_mario_eye_right };
 
 static u16 facedata_mario_eye_right[][4] = {
     { 1, 2, 1, 0 },    { 1, 1, 4, 3 },    { 1, 4, 6, 5 },    { 1, 6, 7, 5 },    { 1, 7, 9, 8 },
@@ -40,44 +41,45 @@ static u16 facedata_mario_eye_right[][4] = {
     { 3, 42, 46, 45 }, { 3, 46, 44, 45 },
 };
 
-static struct GdFaceData faces_mario_eye_right = { ARRAY_COUNT(facedata_mario_eye_right), 0x1, facedata_mario_eye_right };
+static struct GdFaceData faces_mario_eye_right = { ARRAY_COUNT(facedata_mario_eye_right), 0x1,
+                                                   facedata_mario_eye_right };
 
 struct DynList dynlist_mario_eye_right_shape[] = {
     BeginList(),
 
     MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_RIGHT_EYE_VTX_GROUP),
-        LinkWithPtr(&vtx_mario_eye_right),
+    LinkWithPtr(&vtx_mario_eye_right),
 
     MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_RIGHT_EYE_TRI_GROUP),
-        LinkWithPtr(&faces_mario_eye_right),
+    LinkWithPtr(&faces_mario_eye_right),
 
     StartGroup(DYNOBJ_MARIO_RIGHT_EYE_MTL_GROUP),
-        // ???
-        MakeDynObj(D_MATERIAL, 0),
-            SetId(0),
-            SetAmbient(0.0, 0.291, 1.0),
-            SetDiffuse(0.0, 0.291, 1.0),
-        // Iris color
-        MakeDynObj(D_MATERIAL, 0),
-            SetId(1),
-            SetAmbient(0.0, 0.576, 1.0),
-            SetDiffuse(0.0, 0.576, 1.0),
-        // Pupil color
-        MakeDynObj(D_MATERIAL, 0),
-            SetId(2),
-            SetAmbient(0.0, 0.0, 0.0),
-            SetDiffuse(0.0, 0.0, 0.0),
-        // Color of spot in the middle of pupil
-        MakeDynObj(D_MATERIAL, 0),
-            SetId(3),
-            SetAmbient(1.0, 1.0, 1.0),
-            SetDiffuse(1.0, 1.0, 1.0),
+    // ???
+    MakeDynObj(D_MATERIAL, 0),
+    SetId(0),
+    SetAmbient(0.0, 0.291, 1.0),
+    SetDiffuse(0.0, 0.291, 1.0),
+    // Iris color
+    MakeDynObj(D_MATERIAL, 0),
+    SetId(1),
+    SetAmbient(0.0, 0.576, 1.0),
+    SetDiffuse(0.0, 0.576, 1.0),
+    // Pupil color
+    MakeDynObj(D_MATERIAL, 0),
+    SetId(2),
+    SetAmbient(0.0, 0.0, 0.0),
+    SetDiffuse(0.0, 0.0, 0.0),
+    // Color of spot in the middle of pupil
+    MakeDynObj(D_MATERIAL, 0),
+    SetId(3),
+    SetAmbient(1.0, 1.0, 1.0),
+    SetDiffuse(1.0, 1.0, 1.0),
     EndGroup(DYNOBJ_MARIO_RIGHT_EYE_MTL_GROUP),
 
     MakeDynObj(D_SHAPE, DYNOBJ_MARIO_RIGHT_EYE_SHAPE),
-        SetNodeGroup(DYNOBJ_MARIO_RIGHT_EYE_VTX_GROUP),
-        SetPlaneGroup(DYNOBJ_MARIO_RIGHT_EYE_TRI_GROUP),
-        SetMaterialGroup(DYNOBJ_MARIO_RIGHT_EYE_MTL_GROUP),
+    SetNodeGroup(DYNOBJ_MARIO_RIGHT_EYE_VTX_GROUP),
+    SetPlaneGroup(DYNOBJ_MARIO_RIGHT_EYE_TRI_GROUP),
+    SetMaterialGroup(DYNOBJ_MARIO_RIGHT_EYE_MTL_GROUP),
 
     EndList(),
 };
@@ -95,7 +97,8 @@ static s16 verts_mario_eye_left[][3] = {
     { 319, -11, -28 }, { 319, -8, -14 },  { 297, 5, -99 },
 };
 
-static struct GdVtxData vtx_mario_eye_left = { ARRAY_COUNT(verts_mario_eye_left), 0x1, verts_mario_eye_left };
+static struct GdVtxData vtx_mario_eye_left = { ARRAY_COUNT(verts_mario_eye_left), 0x1,
+                                               verts_mario_eye_left };
 
 static u16 facedata_mario_eye_left[][4] = {
     { 1, 0, 1, 2 },    { 1, 3, 4, 1 },    { 1, 5, 6, 4 },    { 1, 5, 7, 6 },    { 1, 8, 9, 7 },
@@ -117,44 +120,45 @@ static u16 facedata_mario_eye_left[][4] = {
     { 3, 45, 46, 42 }, { 3, 45, 44, 46 },
 };
 
-static struct GdFaceData faces_mario_eye_left = { ARRAY_COUNT(facedata_mario_eye_left), 0x1, facedata_mario_eye_left };
+static struct GdFaceData faces_mario_eye_left = { ARRAY_COUNT(facedata_mario_eye_left), 0x1,
+                                                  facedata_mario_eye_left };
 
 struct DynList dynlist_mario_eye_left_shape[28] = {
     BeginList(),
 
     MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_LEFT_EYE_VTX_GROUP),
-        LinkWithPtr(&vtx_mario_eye_left),
+    LinkWithPtr(&vtx_mario_eye_left),
 
     MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_LEFT_EYE_TRI_GROUP),
-        LinkWithPtr(&faces_mario_eye_left),
+    LinkWithPtr(&faces_mario_eye_left),
 
     StartGroup(DYNOBJ_MARIO_LEFT_EYE_MTL_GROUP),
-        // ???
-        MakeDynObj(D_MATERIAL, 0),
-            SetId(0),
-            SetAmbient(0.0, 0.291, 1.0),
-            SetDiffuse(0.0, 0.291, 1.0),
-        // Iris color
-        MakeDynObj(D_MATERIAL, 0),
-            SetId(1),
-            SetAmbient(0.0, 0.576, 1.0),
-            SetDiffuse(0.0, 0.576, 1.0),
-        // Pupil color
-        MakeDynObj(D_MATERIAL, 0),
-            SetId(2),
-            SetAmbient(0.0, 0.0, 0.0),
-            SetDiffuse(0.0, 0.0, 0.0),
-        // Color of spot in the middle of pupil
-        MakeDynObj(D_MATERIAL, 0),
-            SetId(3),
-            SetAmbient(1.0, 1.0, 1.0),
-            SetDiffuse(1.0, 1.0, 1.0),
+    // ???
+    MakeDynObj(D_MATERIAL, 0),
+    SetId(0),
+    SetAmbient(0.0, 0.291, 1.0),
+    SetDiffuse(0.0, 0.291, 1.0),
+    // Iris color
+    MakeDynObj(D_MATERIAL, 0),
+    SetId(1),
+    SetAmbient(0.0, 0.576, 1.0),
+    SetDiffuse(0.0, 0.576, 1.0),
+    // Pupil color
+    MakeDynObj(D_MATERIAL, 0),
+    SetId(2),
+    SetAmbient(0.0, 0.0, 0.0),
+    SetDiffuse(0.0, 0.0, 0.0),
+    // Color of spot in the middle of pupil
+    MakeDynObj(D_MATERIAL, 0),
+    SetId(3),
+    SetAmbient(1.0, 1.0, 1.0),
+    SetDiffuse(1.0, 1.0, 1.0),
     EndGroup(DYNOBJ_MARIO_LEFT_EYE_MTL_GROUP),
 
     MakeDynObj(D_SHAPE, DYNOBJ_MARIO_LEFT_EYE_SHAPE),
-        SetNodeGroup(DYNOBJ_MARIO_LEFT_EYE_VTX_GROUP),
-        SetPlaneGroup(DYNOBJ_MARIO_LEFT_EYE_TRI_GROUP),
-        SetMaterialGroup(DYNOBJ_MARIO_LEFT_EYE_MTL_GROUP),
+    SetNodeGroup(DYNOBJ_MARIO_LEFT_EYE_VTX_GROUP),
+    SetPlaneGroup(DYNOBJ_MARIO_LEFT_EYE_TRI_GROUP),
+    SetMaterialGroup(DYNOBJ_MARIO_LEFT_EYE_MTL_GROUP),
 
     EndList(),
 };

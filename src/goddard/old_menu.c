@@ -64,7 +64,7 @@ void Unknown8018B7A8(void *a0) {
  * @param itemId  ID of the menu item that was clicked
  */
 static void menu_cb_default_settings(intptr_t itemId) {
-    struct ObjGroup *group = (struct ObjGroup *)itemId;  // Unpack pointer from menu item ID
+    struct ObjGroup *group = (struct ObjGroup *) itemId; // Unpack pointer from menu item ID
     apply_to_obj_types_in_group(OBJ_TYPE_GADGETS, (applyproc_t) reset_gadget_default, group);
     apply_to_obj_types_in_group(OBJ_TYPE_VIEWS, (applyproc_t) stub_renderer_6, gGdViewsGroup);
 }
@@ -94,21 +94,20 @@ long create_gui_menu(struct ObjGroup *grp) {
     apply_to_obj_types_in_group(OBJ_TYPE_GROUPS, (applyproc_t) add_item_to_default_settings_menu, grp);
     defaultSettingMenuId = defpup(sDefSettingsMenuStr, &menu_cb_default_settings);
 
-    contTypeMenuId = defpup(
-        "Control Type %t %F"
-        "| U-64 Analogue Joystick %x1 "
-        "| Keyboard %x2 "
-        "| Mouse %x3",
-        &menu_cb_control_type);
+    contTypeMenuId = defpup("Control Type %t %F"
+                            "| U-64 Analogue Joystick %x1 "
+                            "| Keyboard %x2 "
+                            "| Mouse %x3",
+                            &menu_cb_control_type);
 
-    dynamicsMenuId = defpup(
-        "Dynamics %t "
-        "|\t\t\tReset Positions %f "
-        "|\t\t\tSet Defaults %m "
-        "|\t\t\tSet Controller %m "
-        "|\t\t\tRe-Calibrate Controller %f "
-        "|\t\t\tQuit %f",
-        &menu_cb_reset_positions, defaultSettingMenuId, contTypeMenuId, &menu_cb_recalibrate_controller, &gd_exit);
+    dynamicsMenuId = defpup("Dynamics %t "
+                            "|\t\t\tReset Positions %f "
+                            "|\t\t\tSet Defaults %m "
+                            "|\t\t\tSet Controller %m "
+                            "|\t\t\tRe-Calibrate Controller %f "
+                            "|\t\t\tQuit %f",
+                            &menu_cb_reset_positions, defaultSettingMenuId, contTypeMenuId,
+                            &menu_cb_recalibrate_controller, &gd_exit);
 
     return dynamicsMenuId;
 }
@@ -139,7 +138,7 @@ struct ObjGadget *make_gadget(UNUSED s32 a0, s32 a1) {
     gdgt->sliderPos = 1.0f;
     gdgt->size.x = 100.0f;
     gdgt->size.y = 10.0f;
-    gdgt->size.z = 10.0f;  // how is this useful?
+    gdgt->size.z = 10.0f; // how is this useful?
 
     return gdgt;
 }
@@ -208,7 +207,7 @@ void adjust_gadget(struct ObjGadget *gdgt, s32 a1, s32 a2) {
                 gdgt->varval.f = gdgt->sliderPos * range + gdgt->rangeMin;
                 break;
             case OBJ_VALUE_INT:
-                gdgt->varval.i = ((s32)(gdgt->sliderPos * range)) + gdgt->rangeMin;
+                gdgt->varval.i = ((s32) (gdgt->sliderPos * range)) + gdgt->rangeMin;
                 break;
             default:
                 fatal_printf("%s: Undefined ValueType", "adjust_gadget");
@@ -228,7 +227,7 @@ void reset_gadget(struct ObjGadget *gdgt) {
         fatal_printf("gadget has zero range (%f -> %f)\n", gdgt->rangeMin, gdgt->rangeMax);
     }
 
-    range = (f32)(1.0 / (gdgt->rangeMax - gdgt->rangeMin));
+    range = (f32) (1.0 / (gdgt->rangeMax - gdgt->rangeMin));
 
     if (gdgt->valueGrp != NULL) {
         vp = (struct ObjValPtr *) gdgt->valueGrp->firstMember->obj;

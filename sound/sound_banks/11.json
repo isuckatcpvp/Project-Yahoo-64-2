@@ -94,7 +94,7 @@
         "inst1": {
             "release_rate": 208,
             "envelope": "envelope1",
-            "sound": "21_sine_bass_Bb2"
+            "sound": "4B"
         },
         "inst2": {
             "release_rate": 208,
@@ -119,7 +119,7 @@
         "inst6": {
             "release_rate": 128,
             "envelope": "envelope6",
-            "sound": "1B_percussive_synth_Eb3"
+            "sound": "4A"
         },
         "inst7": {
             "release_rate": 208,

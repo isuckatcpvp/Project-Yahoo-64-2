@@ -3,6 +3,9 @@
 #include "levels/wf/header.h"
 #include "levels/wdw/header.h"
 
+// Tells the compiler to look into your new level files for this asset name:
+extern const Collision wf_seg7_collision_rotating_platform[]; 
+
 struct RotatingPlatformData {
     s16 unused;
     s16 scale;

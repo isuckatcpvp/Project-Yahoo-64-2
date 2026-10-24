@@ -15,6 +15,10 @@
 
 #include "levels/intro/header.h"
 
+extern const Gfx gfx_nintendo_logo[];
+
+// 0x0E0002D0
+// 0x0E0002D0
 // 0x0E0002D0
 const GeoLayout intro_geo_0002D0[] = {
     GEO_NODE_SCREEN_AREA(0, SCREEN_WIDTH/2, SCREEN_HEIGHT/2, SCREEN_WIDTH/2, SCREEN_HEIGHT/2),
@@ -28,11 +32,11 @@ const GeoLayout intro_geo_0002D0[] = {
         GEO_CLOSE_NODE(),
         GEO_ZBUFFER(1),
         GEO_OPEN_NODE(),
-            GEO_CAMERA_FRUSTUM(45, 128, 16384),
+            GEO_CAMERA_FRUSTUM(2, 128, 30000), // Set FOV to 2 to flatten 3D perspective distortion safely
             GEO_OPEN_NODE(),
-                GEO_CAMERA(0, 0, 0, 3200, 0, 0, 0, 0x00000000),
+                GEO_CAMERA(0, 0, 0, 25000, 0, 0, 0, 0x00000000), // Pulled back safely so it's not mirrored or too huge
                 GEO_OPEN_NODE(),
-                    GEO_ASM(0, geo_intro_super_mario_64_logo),
+                    GEO_DISPLAY_LIST(LAYER_OPAQUE, gfx_nintendo_logo),
                 GEO_CLOSE_NODE(),
             GEO_CLOSE_NODE(),
         GEO_CLOSE_NODE(),

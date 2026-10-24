@@ -118,7 +118,8 @@ static s16 mario_Face_VtxData[][3] = {
     { -67, -114, 567 },   { 66, -114, 567 },    { 76, 126, 434 },     { -157, 46, 567 },
 };
 
-static struct GdVtxData mario_Face_VtxInfo = { ARRAY_COUNT(mario_Face_VtxData), 0x1, mario_Face_VtxData };
+static struct GdVtxData mario_Face_VtxInfo = { ARRAY_COUNT(mario_Face_VtxData), 0x1,
+                                               mario_Face_VtxData };
 
 static u16 mario_Face_FaceData[][4] = {
     { 0, 43, 102, 112 },  { 0, 102, 42, 188 },  { 0, 354, 356, 188 }, { 0, 188, 198, 354 },
@@ -343,64 +344,65 @@ static u16 mario_Face_FaceData[][4] = {
     { 7, 156, 424, 427 },
 };
 
-static struct GdFaceData mario_Face_FaceInfo = { ARRAY_COUNT(mario_Face_FaceData), 0x1, mario_Face_FaceData };
+static struct GdFaceData mario_Face_FaceInfo = { ARRAY_COUNT(mario_Face_FaceData), 0x1,
+                                                 mario_Face_FaceData };
 
 struct DynList dynlist_mario_face_shape[] = {
     BeginList(),
 
     MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_FACE_VTX_GROUP),
-        LinkWithPtr(&mario_Face_VtxInfo),
+    LinkWithPtr(&mario_Face_VtxInfo),
 
     MakeDynObj(D_DATA_GRP, DYNOBJ_MARIO_FACE_TRI_GROUP),
-        LinkWithPtr(&mario_Face_FaceInfo),
+    LinkWithPtr(&mario_Face_FaceInfo),
 
     StartGroup(DYNOBJ_MARIO_FACE_MTL_GROUP),
-        // Teeth color
-        MakeDynObj(D_MATERIAL, 0),
-            SetId(0),
-            SetAmbient(1.0, 1.0, 1.0),
-            SetDiffuse(1.0, 1.0, 1.0),
-        // Face color
-        MakeDynObj(D_MATERIAL, 0),
-            SetId(1),
-            SetAmbient(0.883, 0.602, 0.408),
-            SetDiffuse(0.883, 0.602, 0.408),
-        // Shadow on back of hat
-        MakeDynObj(D_MATERIAL, 0),
-            SetId(2),
-            SetAmbient(0.362, 0.0, 0.0),
-            SetDiffuse(0.362, 0.0, 0.0),
-        // Cap emblem color
-        MakeDynObj(D_MATERIAL, 0),
-            SetId(3),
-            SetAmbient(1.0, 1.0, 1.0),
-            SetDiffuse(1.0, 1.0, 1.0),
-        // Eye color
-        MakeDynObj(D_MATERIAL, 0),
-            SetId(4),
-            SetAmbient(1.0, 1.0, 1.0),
-            SetDiffuse(1.0, 1.0, 1.0),
-        // Hair color
-        MakeDynObj(D_MATERIAL, 0),
-            SetId(5),
-            SetAmbient(0.362, 0.0, 0.0),
-            SetDiffuse(0.362, 0.0, 0.0),
-        // Mouth color
-        MakeDynObj(D_MATERIAL, 0),
-            SetId(6),
-            SetAmbient(0.526, 0.0, 0.0),
-            SetDiffuse(0.526, 0.0, 0.0),
-        // Cap color
-        MakeDynObj(D_MATERIAL, 0),
-            SetId(7),
-            SetAmbient(1.0, 0.0, 0.0),
-            SetDiffuse(1.0, 0.0, 0.0),
+    // Teeth color
+    MakeDynObj(D_MATERIAL, 0),
+    SetId(0),
+    SetAmbient(1.0, 1.0, 1.0),
+    SetDiffuse(1.0, 1.0, 1.0),
+    // Face color
+    MakeDynObj(D_MATERIAL, 0),
+    SetId(1),
+    SetAmbient(0.883, 0.602, 0.408),
+    SetDiffuse(0.883, 0.602, 0.408),
+    // Shadow on back of hat
+    MakeDynObj(D_MATERIAL, 0),
+    SetId(2),
+    SetAmbient(0.362, 0.0, 0.0),
+    SetDiffuse(0.362, 0.0, 0.0),
+    // Cap emblem color
+    MakeDynObj(D_MATERIAL, 0),
+    SetId(3),
+    SetAmbient(1.0, 1.0, 1.0),
+    SetDiffuse(1.0, 1.0, 1.0),
+    // Eye color
+    MakeDynObj(D_MATERIAL, 0),
+    SetId(4),
+    SetAmbient(1.0, 1.0, 1.0),
+    SetDiffuse(1.0, 1.0, 1.0),
+    // Hair color
+    MakeDynObj(D_MATERIAL, 0),
+    SetId(5),
+    SetAmbient(0.362, 0.0, 0.0),
+    SetDiffuse(0.362, 0.0, 0.0),
+    // Mouth color
+    MakeDynObj(D_MATERIAL, 0),
+    SetId(6),
+    SetAmbient(0.526, 0.0, 0.0),
+    SetDiffuse(0.526, 0.0, 0.0),
+    // Cap color
+    MakeDynObj(D_MATERIAL, 0),
+    SetId(7),
+    SetAmbient(1.0, 0.0, 0.0),
+    SetDiffuse(1.0, 0.0, 0.0),
     EndGroup(DYNOBJ_MARIO_FACE_MTL_GROUP),
 
     MakeDynObj(D_SHAPE, DYNOBJ_MARIO_FACE_SHAPE),
-        SetNodeGroup(DYNOBJ_MARIO_FACE_VTX_GROUP),
-        SetPlaneGroup(DYNOBJ_MARIO_FACE_TRI_GROUP),
-        SetMaterialGroup(DYNOBJ_MARIO_FACE_MTL_GROUP),
+    SetNodeGroup(DYNOBJ_MARIO_FACE_VTX_GROUP),
+    SetPlaneGroup(DYNOBJ_MARIO_FACE_TRI_GROUP),
+    SetMaterialGroup(DYNOBJ_MARIO_FACE_MTL_GROUP),
 
     EndList(),
 };

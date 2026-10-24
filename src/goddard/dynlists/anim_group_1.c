@@ -145,7 +145,8 @@ static s16 animdata_mario_eyebrows_equalizer_1[][3] = {
 };
 
 struct AnimDataInfo anim_mario_eyebrows_equalizer[] = {
-    { ARRAY_COUNT(animdata_mario_eyebrows_equalizer_1), GD_ANIM_ROT3S, animdata_mario_eyebrows_equalizer_1 },
+    { ARRAY_COUNT(animdata_mario_eyebrows_equalizer_1), GD_ANIM_ROT3S,
+      animdata_mario_eyebrows_equalizer_1 },
     { 0, GD_ANIM_EMPTY, NULL },
     END_ANIMDATA_INFO_ARR,
 };
