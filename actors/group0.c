@@ -5,8 +5,24 @@
 
 #include "make_const_nonconst.h"
 
+#include "common1.h"
+#include "group0.h"
+
+#include "include/project.h"
+#include "include/gfxmain.h"
+#include "include/gex.h"
+
 // Note: This bin does not use bin IDs, unlike the other segmented bins.
+
+#if LUIGI == 0
 #include "mario/model.inc.c"
+#elif LUIGI == 1
+#include "mario/model.inc.c"
+#include "luigi/model.inc.c"
+#else
+#include "mario/Mario/mario_texture.h"
+#include "luigi/model.inc.c"
+#endif
 
 #include "bubble/model.inc.c"
 

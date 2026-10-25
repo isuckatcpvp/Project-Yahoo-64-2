@@ -58,6 +58,8 @@ static const LevelScript script_L5[4];
 #undef DEFINE_LEVEL
 #undef STUB_LEVEL
 
+extern const GeoLayout RCP_MarioHierarchy[];
+
 const LevelScript level_main_scripts_entry[] = {
     LOAD_MIO0(/*seg*/ 0x04, _group0_mio0SegmentRomStart, _group0_mio0SegmentRomEnd),
     LOAD_MIO0(/*seg*/ 0x03, _common1_mio0SegmentRomStart, _common1_mio0SegmentRomEnd),
@@ -65,7 +67,7 @@ const LevelScript level_main_scripts_entry[] = {
     LOAD_RAW (/*seg*/ 0x16, _common1_geoSegmentRomStart, _common1_geoSegmentRomEnd),
     LOAD_RAW (/*seg*/ 0x13, _behaviorSegmentRomStart, _behaviorSegmentRomEnd),
     ALLOC_LEVEL_POOL(),
-    LOAD_MODEL_FROM_GEO(MODEL_MARIO,                   mario_geo),
+    LOAD_MODEL_FROM_GEO(MODEL_MARIO,                   RCP_MarioHierarchy),
     LOAD_MODEL_FROM_GEO(MODEL_SMOKE,                   smoke_geo),
     LOAD_MODEL_FROM_GEO(MODEL_SPARKLES,                sparkles_geo),
     LOAD_MODEL_FROM_GEO(MODEL_BUBBLE,                  bubble_geo),
